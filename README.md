@@ -1,50 +1,92 @@
-# React + TypeScript + Vite
+# Soar Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A financial dashboard application with multiple views for the
+user (overview and settings).
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript
+- Vite 6
+- TailwindCSS 4
 
-## Expanding the ESLint configuration
+## Development Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+- Node.js (Latest LTS version recommended)
+- npm or yarn
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Installation
+
+```bash
+# Clone the repository
+git clone git@github.com:LuthfulahiO/soar-dashboard.git
+
+# Install dependencies
+yarn install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Available Scripts
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+# Start development server
+yarn dev
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# Build for production
+yarn build
+
+# Preview production build
+yarn preview
+
+# Lint code
+yarn lint
+
+# Fix linting issues
+yarn lint:fix
+
+# Format code
+yarn format
+
+# Check formatting
+yarn format:check
+
+# Run all checks (format + lint)
+yarn check
+```
+
+## Code Style Guide
+
+This project enforces consistent code style using:
+
+- ESLint for code quality and style checking
+- Prettier for code formatting
+- TypeScript for type safety
+
+### Key Style Rules
+
+- Double quotes for strings and JSX attributes
+- Strict TypeScript checks enabled
+- Automatic import sorting
+- React best practices enforcement
+- No console.log statements
+
+### VSCode Setup
+
+The project includes recommended VSCode settings and extensions. Install the following extensions for the best development experience:
+
+- Prettier - Code formatter (esbenp.prettier-vscode)
+- ESLint (dbaeumer.vscode-eslint)
+- Tailwind CSS IntelliSense (bradlc.vscode-tailwindcss)
+- Pretty TypeScript Errors (YoavBls.pretty-ts-errors)
+
+Code will be automatically formatted on save and ESLint errors will be highlighted in your editor.
+
+## Project Structure
+
+```
+src/
+├── components/     # Reusable components
+├── App.tsx        # Main application component
+└── main.tsx       # Application entry point
 ```
