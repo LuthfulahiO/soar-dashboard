@@ -1,8 +1,17 @@
+import { Routes, Route } from "react-router";
+
+import DashboardLayout from "@/pages/(dashboard)/layout";
+import Overview from "@/pages/(dashboard)/overview";
+import Settings from "@/pages/(dashboard)/settings";
+
 function App() {
   return (
-    <div className="h-screen w-full flex justify-center items-center">
-      <h1>Soar Dashboard</h1>
-    </div>
+    <Routes>
+      <Route element={<DashboardLayout />}>
+        <Route path="/" element={<Overview />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+    </Routes>
   );
 }
 
