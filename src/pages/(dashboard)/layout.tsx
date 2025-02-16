@@ -79,6 +79,7 @@ const DashboardNavLink = ({
     className={({ isActive }) =>
       cn(
         "flex items-center gap-[1.625rem] px-4 py-2 transition-colors relative h-[3.75rem] pl-11",
+        "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
         isActive ? "text-neutral-900 font-medium" : "text-neutral-500"
       )
     }
@@ -86,7 +87,7 @@ const DashboardNavLink = ({
     {({ isActive }) => (
       <>
         {isActive && (
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[6px] h-full bg-[#232323] rounded-r-[10px]" />
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[6px] h-full bg-neutral-900 rounded-r-[10px]" />
         )}
         <Icon icon={icon} className="size-6" />
         <span className="text-lg">{children}</span>
@@ -99,7 +100,7 @@ export default function DashboardLayout() {
   return (
     <SidebarProvider>
       <Sidebar>
-        <div data-sidebar="header" className="flex h-[101px] pl-11 mb-2">
+        <div data-sidebar="header" className="flex h-[100px] pl-11 mb-2">
           <div className="flex items-center gap-2">
             <Logo className="size-[1.5625rem]" />
             <h1 className="font-[800] text-2xl">Soar Task</h1>

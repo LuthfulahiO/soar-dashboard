@@ -1,7 +1,9 @@
+import { DashboardHeader } from "@/components/dashboard-header";
+
 function Overview() {
   return (
-    <div className="h-screen w-full flex">
-      <h1>Overview</h1>
+    <div className="h-screen w-full flex flex-col bg-neutral-50">
+      <DashboardHeader title="Overview" />
     </div>
   );
 }

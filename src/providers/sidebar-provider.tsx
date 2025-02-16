@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const SidebarProvider = forwardRef<HTMLDivElement, ComponentProps<"div">>(
   ({ className, children, ...props }, ref) => {
     const isMobile = useIsMobile();
-    const [openMobile, setOpenMobile] = useState(true);
+    const [openMobile, setOpenMobile] = useState(false);
 
     const toggleSidebar = useCallback(() => {
       setOpenMobile((open) => !open);
