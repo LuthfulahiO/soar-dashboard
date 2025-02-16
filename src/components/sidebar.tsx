@@ -54,7 +54,7 @@ const SidebarInset = forwardRef<HTMLDivElement, React.ComponentProps<"main">>(
         id="main-content"
         ref={ref}
         className={cn(
-          "relative flex min-h-svh flex-1 flex-col",
+          "relative min-h-svh w-full overflow-x-hidden",
           !isMobile && "ml-[var(--sidebar-width)]",
           className
         )}

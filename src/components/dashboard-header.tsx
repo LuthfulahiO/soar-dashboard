@@ -27,7 +27,7 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
     <header className="w-full flex flex-col lg:flex-row lg:h-[100px] bg-white lg:border-b border-b-border">
       {/* Top section */}
       <div className="flex flex-row justify-between items-center lg:items-center lg:px-10 px-[25px] pt-5 lg:pt-0 lg:h-full w-full">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 lg:hidden">
           <button
             onClick={toggleSidebar}
             className="md:hidden size-[3.125rem] flex items-center justify-center"
@@ -35,14 +35,18 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
             type="button"
           >
             <HamburgerIcon
-              className="size-[1.5625rem] text-secondary"
+              className="size-5 text-secondary"
               aria-hidden="true"
             />
           </button>
-          <h1 className="text-[1.5rem] lg:text-[1.75rem] font-semibold leading-[33.89px]">
+          {/* <h1 className="text-[1.5rem] lg:text-[1.75rem] font-semibold leading-[33.89px]">
             {title}
-          </h1>
+          </h1> */}
         </div>
+
+        <h1 className="text-[1.5rem] lg:text-[1.75rem] font-semibold leading-[33.89px]">
+          {title}
+        </h1>
 
         <div className="flex flex-row items-center gap-3 lg:gap-[1.875rem]">
           <div className="hidden lg:block relative">

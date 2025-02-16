@@ -1,4 +1,3 @@
-import Logo from "@public/logo.svg?react";
 import { Outlet, NavLink } from "react-router";
 
 import {
@@ -11,6 +10,7 @@ import {
   ServiceIcon,
   SettingsIcon,
   EconomicIcon,
+  LogoIcon,
 } from "@/assets/icons";
 import { Icon } from "@/components/Icon";
 import { Sidebar, SidebarInset } from "@/components/sidebar";
@@ -78,8 +78,10 @@ const DashboardNavLink = ({
     to={to}
     className={({ isActive }) =>
       cn(
-        "flex items-center gap-[1.625rem] px-4 py-2 transition-colors relative h-[3.75rem] pl-11",
-        "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+        "flex items-center gap-[1.625rem] px-4 py-2 transition-all relative h-[3.75rem] pl-11",
+        "focus:outline-none focus:bg-neutral-200/80 focus:scale-[0.98]",
+        "hover:bg-neutral-200/60",
+        "active:scale-95",
         isActive ? "text-neutral-900 font-medium" : "text-neutral-500"
       )
     }
@@ -99,29 +101,31 @@ const DashboardNavLink = ({
 export default function DashboardLayout() {
   return (
     <SidebarProvider>
-      <Sidebar>
-        <div data-sidebar="header" className="flex h-[100px] pl-11 mb-2">
-          <div className="flex items-center gap-2">
-            <Logo className="size-[1.5625rem]" />
-            <h1 className="font-[800] text-2xl">Soar Task</h1>
+      <div className="relative flex min-h-svh w-full overflow-x-hidden">
+        <Sidebar>
+          <div data-sidebar="header" className="flex h-[100px] pl-11 mb-1">
+            <div className="flex items-center gap-2">
+              <LogoIcon className="size-[1.5625rem]" />
+              <h1 className="font-[800] text-2xl">Soar Task</h1>
+            </div>
           </div>
-        </div>
-        <div
-          data-sidebar="content"
-          className="flex min-h-0 flex-1 flex-col gap-2 overflow-auto"
-        >
-          <nav className="flex flex-col gap-1">
-            {navigationItems.map((item) => (
-              <DashboardNavLink key={item.to} to={item.to} icon={item.icon}>
-                {item.label}
-              </DashboardNavLink>
-            ))}
-          </nav>
-        </div>
-      </Sidebar>
-      <SidebarInset>
-        <Outlet />
-      </SidebarInset>
+          <div
+            data-sidebar="content"
+            className="flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-1"
+          >
+            <nav className="flex flex-col gap-1">
+              {navigationItems.map((item) => (
+                <DashboardNavLink key={item.to} to={item.to} icon={item.icon}>
+                  {item.label}
+                </DashboardNavLink>
+              ))}
+            </nav>
+          </div>
+        </Sidebar>
+        <SidebarInset>
+          <Outlet />
+        </SidebarInset>
+      </div>
     </SidebarProvider>
   );
 }
