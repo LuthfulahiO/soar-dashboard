@@ -49,3 +49,16 @@ export interface User {
   email: string;
   avatar?: string;
 }
+
+export interface UserProfile {
+  yourName: string;
+  userName: string;
+  email: string;
+  dateOfBirth: string;
+  presentAddress: string;
+  permanentAddress: string;
+  postalCode: string;
+  city: string;
+  country: string;
+  profileImage: string;
+}

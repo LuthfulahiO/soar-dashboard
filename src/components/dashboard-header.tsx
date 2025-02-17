@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router";
 
 import {
   SettingsTwoIcon,
@@ -7,6 +8,8 @@ import {
   HamburgerIcon,
 } from "@/assets/icons";
 import { IconButton } from "@/components/icon-button";
+import { Skeleton } from "@/components/skeleton";
+import { useUserProfile } from "@/hooks/use-queries";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/providers/sidebar-context";
 
@@ -15,6 +18,7 @@ interface DashboardHeaderProps {
 }
 
 export function DashboardHeader({ title }: DashboardHeaderProps) {
+  const { data: profile, isLoading } = useUserProfile();
   const [hasNotification, setHasNotification] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { toggleSidebar } = useSidebar();
@@ -86,28 +90,30 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
           </div>
 
           <div className="hidden lg:flex items-center gap-3 lg:gap-[1.875rem]">
-            <IconButton
-              icon={
-                <SettingsTwoIcon
-                  aria-hidden="true"
-                  className={cn(
-                    "size-[1.5625rem] text-secondary",
-                    "transition-transform duration-200",
-                    "group-hover:rotate-45",
-                    "group-active:rotate-90"
-                  )}
-                />
-              }
-              onClick={() => {}}
-              ariaLabel="Settings"
-              className={cn(
-                "group p-2 rounded-full",
-                "transition-all duration-200",
-                "hover:bg-neutral-100",
-                "active:bg-neutral-200 active:scale-95",
-                "focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
-              )}
-            />
+            <NavLink to="/settings">
+              <IconButton
+                icon={
+                  <SettingsTwoIcon
+                    aria-hidden="true"
+                    className={cn(
+                      "size-[1.5625rem] text-secondary",
+                      "transition-transform duration-200",
+                      "group-hover:rotate-45",
+                      "group-active:rotate-90"
+                    )}
+                  />
+                }
+                onClick={() => {}}
+                ariaLabel="Settings"
+                className={cn(
+                  "group p-2 rounded-full",
+                  "transition-all duration-200",
+                  "hover:bg-neutral-100",
+                  "active:bg-neutral-200 active:scale-95",
+                  "focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
+                )}
+              />
+            </NavLink>
 
             <IconButton
               icon={
@@ -134,20 +140,26 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
             />
           </div>
 
-          <button
-            className={cn(
-              "relative rounded-full",
-              "transition-transform duration-200",
-              "hover:scale-105 active:scale-100",
-              "focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
-            )}
-          >
-            <img
-              className="size-[3.125rem] lg:size-[3.75rem] rounded-full"
-              src="/images/profile-picture.png"
-              alt="User profile"
-            />
-          </button>
+          {isLoading ? (
+            <Skeleton className="size-[3.125rem] lg:size-[3.75rem] rounded-full bg-neutral-200" />
+          ) : (
+            <NavLink to="/settings">
+              <button
+                className={cn(
+                  "relative rounded-full",
+                  "transition-transform duration-200",
+                  "hover:scale-105 active:scale-100",
+                  "focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
+                )}
+              >
+                <img
+                  className="size-[3.125rem] lg:size-[3.75rem] rounded-full"
+                  src={profile?.profileImage || "/images/profile-picture.png"}
+                  alt="User profile"
+                />
+              </button>
+            </NavLink>
+          )}
         </div>
       </div>
 

@@ -8,6 +8,7 @@ import {
   ExpenseStats,
   Contact,
   BalanceHistory,
+  UserProfile,
 } from "@/types/index";
 
 export function useCards(): UseQueryResult<Card[], Error> {
@@ -49,5 +50,12 @@ export function useContacts(): UseQueryResult<Contact[], Error> {
   return useQuery({
     queryKey: ["contacts"],
     queryFn: apiService.getContacts,
+  });
+}
+
+export function useUserProfile(): UseQueryResult<UserProfile, Error> {
+  return useQuery({
+    queryKey: ["user-profile"],
+    queryFn: apiService.getUserProfile,
   });
 }

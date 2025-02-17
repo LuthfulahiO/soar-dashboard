@@ -7,6 +7,7 @@ import {
   ExpenseStats,
   Contact,
   BalanceHistory,
+  UserProfile,
 } from "@/types";
 
 import { MOCK_DATA } from "./mock-data";
@@ -81,5 +82,9 @@ export const apiService = {
 
   getContacts: async (): Promise<Contact[]> => {
     return simulateNetwork(MOCK_DATA.contacts);
+  },
+
+  getUserProfile: async (): Promise<UserProfile> => {
+    return simulateNetwork(MOCK_DATA.userProfile);
   },
 };
