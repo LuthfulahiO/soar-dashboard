@@ -12,11 +12,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/chart";
-
-interface BalanceHistoryData {
-  month: string;
-  value: number;
-}
+import { Skeleton } from "@/components/skeleton";
+import { useBalanceHistory } from "@/hooks/use-queries";
 
 interface CustomTickProps {
   x: number;
@@ -25,17 +22,6 @@ interface CustomTickProps {
     value: string | number;
   };
 }
-
-const CHART_DATA: BalanceHistoryData[] = [
-  { month: "Jun", value: 160 },
-  { month: "Jul", value: 640 },
-  { month: "Aug", value: 440 },
-  { month: "Sep", value: 250 },
-  { month: "Oct", value: 1000 },
-  { month: "Nov", value: 400 },
-  { month: "Dec", value: 700 },
-  { month: "Jan", value: 220 },
-];
 
 const CHART_MARGINS = {
   top: 10,
@@ -94,10 +80,26 @@ const CustomYAxisTick = ({ x, y, payload }: CustomTickProps) => (
 );
 
 export function BalanceHistory() {
+  const { data: balanceData, isLoading, error } = useBalanceHistory();
+
+  if (error) {
+    return (
+      <div className="flex h-[236px] items-center justify-center rounded-[25px] md:bg-white">
+        <p className="text-error">Failed to load balance history</p>
+      </div>
+    );
+  }
+
+  if (isLoading || !balanceData) {
+    return (
+      <Skeleton className="h-[236px] w-full md:bg-white/70 bg-neutral-500 rounded-[25px]" />
+    );
+  }
+
   return (
     <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem]">
       <ChartContainer config={{}} className="h-[236px] w-full">
-        <AreaChart data={CHART_DATA} margin={CHART_MARGINS}>
+        <AreaChart data={balanceData} margin={CHART_MARGINS}>
           <defs>
             <linearGradient id="colorFill" x1="0" y1="0" x2="0" y2="1">
               <stop

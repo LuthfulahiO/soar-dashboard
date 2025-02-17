@@ -1,5 +1,7 @@
 import { DashboardBody } from "@/components/dashboard-body";
 import { DashboardHeader } from "@/components/dashboard-header";
+import { Skeleton } from "@/components/skeleton";
+import { useCards } from "@/hooks/use-queries";
 import { cn } from "@/lib/utils";
 
 import { BalanceHistory } from "./components/balance-history";
@@ -9,23 +11,9 @@ import { QuickTransfer } from "./components/quick-transfer";
 import { RecentTransaction } from "./components/recent-transaction";
 import { WeeklyActivity } from "./components/weekly-activity";
 
-const cards = [
-  {
-    isDefault: true,
-    balance: 5756,
-    cardHolder: "Eddy Cusuma",
-    validThru: "12/22",
-    cardNumber: "3778 **** **** 1234",
-  },
-  {
-    balance: 8432.19,
-    cardHolder: "Sarah Johnson",
-    validThru: "08/26",
-    cardNumber: "4532 **** **** 5678",
-  },
-];
-
 function Overview() {
+  const { data: cardsData, isLoading: isCardsLoading } = useCards();
+
   return (
     <div className="min-h-full w-full flex flex-col md:bg-neutral-50">
       <DashboardHeader title="Overview" />
@@ -51,18 +39,25 @@ function Overview() {
               </button>
             </div>
             <div className="w-full overflow-hidden">
-              <div className="flex gap-[1.875rem] overflow-x-auto hide-scrollbar w-full">
-                {cards.map((card, index) => (
-                  <CardDetails
-                    key={index}
-                    isDefault={card.isDefault}
-                    balance={card.balance}
-                    cardHolder={card.cardHolder}
-                    validThru={card.validThru}
-                    cardNumber={card.cardNumber}
-                  />
-                ))}
-              </div>
+              {isCardsLoading ? (
+                <div className="flex gap-[1.875rem] overflow-x-auto hide-scrollbar w-full">
+                  <Skeleton className="min-w-[265px] w-[265px] h-[170px] md:min-w-[350px] md:w-[350px] md:h-[235px] md:bg-white/70 bg-neutral-500 rounded-[25px]" />
+                  <Skeleton className="min-w-[265px] w-[265px] h-[170px] md:min-w-[350px] md:w-[350px] md:h-[235px] md:bg-white/70 bg-neutral-500 rounded-[25px]" />
+                </div>
+              ) : (
+                <div className="flex gap-[1.875rem] overflow-x-auto hide-scrollbar w-full">
+                  {cardsData?.map((card, index) => (
+                    <CardDetails
+                      key={index}
+                      isDefault={card.isDefault}
+                      balance={card.balance}
+                      cardHolder={card.cardHolder}
+                      validThru={card.validThru}
+                      cardNumber={card.cardNumber}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

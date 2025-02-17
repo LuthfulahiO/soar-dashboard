@@ -15,6 +15,7 @@ import {
 import { Icon } from "@/components/Icon";
 import { Sidebar, SidebarInset } from "@/components/sidebar";
 import { cn } from "@/lib/utils";
+import { QueryProvider } from "@/providers/query-provider";
 import SidebarProvider from "@/providers/sidebar-provider";
 
 const navigationItems = [
@@ -138,47 +139,49 @@ const DashboardNavLink = ({
 export default function DashboardLayout() {
   return (
     <SidebarProvider>
-      <div className="relative flex min-h-svh w-full overflow-x-hidden">
-        <Sidebar>
-          <div
-            data-sidebar="header"
-            className={cn(
-              "flex h-[100px] pl-11 mb-1",
-              "transition-transform duration-200",
-              "hover:scale-[1.02]"
-            )}
-          >
-            <div className="flex items-center gap-2 group">
-              <LogoIcon className="size-[1.5625rem]" />
-              <h1
-                className={cn(
-                  "font-[800] text-2xl",
-                  "transition-all duration-200",
-                  "group-hover:tracking-wide"
-                )}
-              >
-                Soar Task
-              </h1>
+      <QueryProvider>
+        <div className="relative flex min-h-svh w-full overflow-x-hidden">
+          <Sidebar>
+            <div
+              data-sidebar="header"
+              className={cn(
+                "flex h-[100px] pl-11 mb-1",
+                "transition-transform duration-200",
+                "hover:scale-[1.02]"
+              )}
+            >
+              <div className="flex items-center gap-2 group">
+                <LogoIcon className="size-[1.5625rem]" />
+                <h1
+                  className={cn(
+                    "font-[800] text-2xl",
+                    "transition-all duration-200",
+                    "group-hover:tracking-wide"
+                  )}
+                >
+                  Soar Task
+                </h1>
+              </div>
             </div>
-          </div>
 
-          <div
-            data-sidebar="content"
-            className="flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral-200 hover:scrollbar-thumb-neutral-300"
-          >
-            <nav className="flex flex-col gap-1">
-              {navigationItems.map((item) => (
-                <DashboardNavLink key={item.to} to={item.to} icon={item.icon}>
-                  {item.label}
-                </DashboardNavLink>
-              ))}
-            </nav>
-          </div>
-        </Sidebar>
-        <SidebarInset>
-          <Outlet />
-        </SidebarInset>
-      </div>
+            <div
+              data-sidebar="content"
+              className="flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral-200 hover:scrollbar-thumb-neutral-300"
+            >
+              <nav className="flex flex-col gap-1">
+                {navigationItems.map((item) => (
+                  <DashboardNavLink key={item.to} to={item.to} icon={item.icon}>
+                    {item.label}
+                  </DashboardNavLink>
+                ))}
+              </nav>
+            </div>
+          </Sidebar>
+          <SidebarInset>
+            <Outlet />
+          </SidebarInset>
+        </div>
+      </QueryProvider>
     </SidebarProvider>
   );
 }

@@ -5,31 +5,24 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/chart";
+import { Skeleton } from "@/components/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-interface ActivityData {
-  day: string;
-  deposit: number;
-  withdraw: number;
-}
+import { useWeeklyActivity } from "@/hooks/use-queries";
 
 const CHART_COLORS = {
   deposit: "#396AFF",
   withdraw: "#232323",
 } as const;
 
-const chartData: ActivityData[] = [
-  { day: "Sat", deposit: 220, withdraw: 480 },
-  { day: "Sun", deposit: 130, withdraw: 350 },
-  { day: "Mon", deposit: 275, withdraw: 330 },
-  { day: "Tue", deposit: 380, withdraw: 490 },
-  { day: "Wed", deposit: 230, withdraw: 155 },
-  { day: "Thu", deposit: 230, withdraw: 390 },
-  { day: "Fri", deposit: 330, withdraw: 390 },
-];
-
 export function WeeklyActivity() {
+  const { data: activityData, isLoading } = useWeeklyActivity();
   const isMobile = useIsMobile();
+
+  if (isLoading) {
+    return (
+      <Skeleton className="h-[300px] w-full md:bg-white/70 bg-neutral-500 rounded-[25px]" />
+    );
+  }
 
   return (
     <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem]">
@@ -52,7 +45,7 @@ export function WeeklyActivity() {
         className="h-[226px] w-full"
       >
         <BarChart
-          data={chartData}
+          data={activityData}
           barGap={isMobile ? 5 : 12}
           margin={{
             top: 10,

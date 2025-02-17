@@ -7,36 +7,9 @@ import type {
 } from "recharts/types/polar/Pie";
 
 import { ChartConfig, ChartContainer } from "@/components/chart";
+import { Skeleton } from "@/components/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-interface ExpenseData {
-  name: string;
-  percentage: number;
-  color: string;
-}
-
-const EXPENSE_DATA: ExpenseData[] = [
-  {
-    name: "Bill Expense",
-    percentage: 15,
-    color: "#FC7900",
-  },
-  {
-    name: "Entertainment",
-    percentage: 30,
-    color: "#343C6A",
-  },
-  {
-    name: "Investment",
-    percentage: 35,
-    color: "#396AFF",
-  },
-  {
-    name: "Others",
-    percentage: 20,
-    color: "#232323",
-  },
-];
+import { useExpenseStats } from "@/hooks/use-queries";
 
 const CustomLabel = ({
   cx,
@@ -82,10 +55,25 @@ const CustomShape = ({
 );
 
 export function ExpenseStats() {
+  const { data: expenseData, isLoading, error } = useExpenseStats();
   const isMobile = useIsMobile();
 
+  if (error) {
+    return (
+      <div className="flex h-[311px] flex-col items-center justify-center gap-3 rounded-[25px] md:gap-[10px] md:bg-white">
+        <p className="text-error">Failed to load expense stats</p>
+      </div>
+    );
+  }
+
+  if (isLoading || !expenseData) {
+    return (
+      <Skeleton className="h-[300px] w-full rounded-[25px] md:bg-white/70 bg-neutral-500" />
+    );
+  }
+
   const chartConfig: ChartConfig = Object.fromEntries(
-    EXPENSE_DATA.map((entry) => [
+    expenseData.map((entry) => [
       entry.name,
       {
         label: entry.name,
@@ -102,7 +90,7 @@ export function ExpenseStats() {
       >
         <PieChart>
           <Pie
-            data={EXPENSE_DATA}
+            data={expenseData}
             dataKey="percentage"
             nameKey="name"
             strokeWidth={10}
@@ -120,7 +108,7 @@ export function ExpenseStats() {
             activeShape={CustomShape}
             inactiveShape={CustomShape}
           >
-            {EXPENSE_DATA.map((entry, index) => (
+            {expenseData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
