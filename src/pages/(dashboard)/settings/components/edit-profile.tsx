@@ -35,6 +35,14 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
 export default function EditProfile() {
   const { data: profile, isLoading } = useUserProfile();
   const [previewImage, setPreviewImage] = useState<string>(
@@ -79,6 +87,16 @@ export default function EditProfile() {
         // Create preview URL for the selected image
         const imageUrl = URL.createObjectURL(file);
         setPreviewImage(imageUrl);
+      }
+    },
+    []
+  );
+
+  const handleDateInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const date = e.target.valueAsDate;
+      if (date) {
+        e.target.setAttribute("data-display", formatDate(date));
       }
     },
     []
@@ -241,6 +259,12 @@ export default function EditProfile() {
                 {...register("dateOfBirth")}
                 error={!!errors.dateOfBirth}
                 placeholder="25 January 1990"
+                onChange={(e) => {
+                  handleDateInput(e);
+                  register("dateOfBirth").onChange(e);
+                }}
+                onClick={(e) => (e.target as HTMLInputElement).showPicker()}
+                className="w-full relative [&::-webkit-datetime-edit]:hidden [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:opacity-100 [&::before]:absolute [&::before]:left-3 [&::before]:top-1/2 [&::before]:-translate-y-1/2 [&::before]:content-[attr(data-display)] [&::before]:text-neutral-500 [&:not(:placeholder-shown)::before]:text-neutral-900 cursor-pointer"
               />
               <FormError message={errors.dateOfBirth?.message} />
             </div>
