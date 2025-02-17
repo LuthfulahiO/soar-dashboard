@@ -29,6 +29,8 @@
   }
 }
 
+@plugin "tailwindcss-animate";
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
