@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 
+import Cards from "@/pages/(dashboard)/cards";
 import Empty from "@/pages/(dashboard)/empty";
 import DashboardLayout from "@/pages/(dashboard)/layout";
 import Overview from "@/pages/(dashboard)/overview";
@@ -14,7 +15,7 @@ function App() {
         <Route path="transactions" element={<Empty />} />
         <Route path="accounts" element={<Empty />} />
         <Route path="investments" element={<Empty />} />
-        <Route path="credit-cards" element={<Empty />} />
+        <Route path="credit-cards" element={<Cards />} />
         <Route path="loans" element={<Empty />} />
         <Route path="services" element={<Empty />} />
         <Route path="privileges" element={<Empty />} />
