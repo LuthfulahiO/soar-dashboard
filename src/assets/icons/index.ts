@@ -13,6 +13,7 @@ import LoanIcon from "@/assets/icons/loan.svg?react";
 import LogoIcon from "@/assets/icons/logo.svg?react";
 import MastercardIcon from "@/assets/icons/mastercard.svg?react";
 import PaypalIcon from "@/assets/icons/paypal.svg?react";
+import PencilIcon from "@/assets/icons/pencil.svg?react";
 import SearchIcon from "@/assets/icons/search.svg?react";
 import SendIcon from "@/assets/icons/send.svg?react";
 import ServiceIcon from "@/assets/icons/service.svg?react";
@@ -44,4 +45,5 @@ export {
   LogoIcon,
   CaretRightIcon,
   SendIcon,
+  PencilIcon,
 };
