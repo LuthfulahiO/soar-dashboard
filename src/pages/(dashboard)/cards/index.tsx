@@ -1,9 +1,8 @@
-import { CardDetails } from "../overview/components/card-details";
-
 import { DashboardBody } from "@/components/dashboard-body";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { Skeleton } from "@/components/skeleton";
 import { useCards } from "@/hooks/use-queries";
+import { CardDetails } from "@/pages/(dashboard)/overview/components/card-details";
 
 function Cards() {
   const { data: cardsData, isLoading: isCardsLoading } = useCards();
