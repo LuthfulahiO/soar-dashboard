@@ -96,7 +96,7 @@ const CustomYAxisTick = ({ x, y, payload }: CustomTickProps) => (
 export function BalanceHistory() {
   return (
     <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem]">
-      <ChartContainer config={{}} className="h-[226px] w-full">
+      <ChartContainer config={{}} className="h-[236px] w-full">
         <AreaChart data={CHART_DATA} margin={CHART_MARGINS}>
           <defs>
             <linearGradient id="colorFill" x1="0" y1="0" x2="0" y2="1">

@@ -1,9 +1,11 @@
 import { DashboardBody } from "@/components/dashboard-body";
 import { DashboardHeader } from "@/components/dashboard-header";
+import { cn } from "@/lib/utils";
 
 import { BalanceHistory } from "./components/balance-history";
 import { CardDetails } from "./components/card-details";
 import { ExpenseStats } from "./components/expense-stats";
+import { QuickTransfer } from "./components/quick-transfer";
 import { RecentTransaction } from "./components/recent-transaction";
 import { WeeklyActivity } from "./components/weekly-activity";
 
@@ -29,13 +31,22 @@ function Overview() {
       <DashboardHeader title="Overview" />
       <DashboardBody>
         {/* Top Row - Cards and Recent Transactions */}
-        <div className="flex flex-col lg:flex-row gap-[1.875rem]">
-          <div className="w-full lg:w-[calc(730/1110*100%)]">
+        <div className="flex flex-col xl:flex-row gap-[1.875rem]">
+          <div className="w-full xl:w-[calc(730/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 My Cards
               </h2>
-              <button className="text-[1.0625rem] font-semibold leading-[1.285625] cursor-pointer">
+              <button
+                className={cn(
+                  "text-[1.0625rem] font-semibold leading-[1.285625] cursor-pointer",
+                  "transition-all duration-200",
+                  "hover:text-neutral-700 hover:scale-105",
+                  "active:scale-95",
+                  "focus:outline-none focus-visible:ring-2",
+                  "focus-visible:ring-neutral-900/20 focus-visible:ring-offset-2"
+                )}
+              >
                 See All
               </button>
             </div>
@@ -55,7 +66,7 @@ function Overview() {
             </div>
           </div>
 
-          <div className="w-full lg:w-[calc(350/1110*100%)]">
+          <div className="w-full xl:w-[calc(350/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 Recent Transaction
@@ -67,8 +78,8 @@ function Overview() {
         </div>
 
         {/* Middle Row - Weekly Activity and Expense Statistics */}
-        <div className="flex flex-col lg:flex-row gap-[1.875rem]">
-          <div className="w-full lg:w-[calc(730/1110*100%)] min-h-[300px]">
+        <div className="flex flex-col xl:flex-row gap-[1.875rem]">
+          <div className="w-full xl:w-[calc(730/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 Weekly Activity
@@ -76,7 +87,7 @@ function Overview() {
             </div>
             <WeeklyActivity />
           </div>
-          <div className="w-full lg:w-[calc(350/1110*100%)] min-h-[300px]">
+          <div className="w-full xl:w-[calc(350/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 Expense Statistics
@@ -87,20 +98,16 @@ function Overview() {
         </div>
 
         {/* Bottom Row - Quick Transfer and Balance History */}
-        <div className="flex flex-col lg:flex-row gap-[1.875rem]">
-          <div className="w-full lg:w-[calc(445/1110*100%)] min-h-[300px]">
+        <div className="flex flex-col xl:flex-row gap-[1.875rem]">
+          <div className="w-full xl:w-[calc(445/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 Quick Transfer
               </h2>
             </div>
-            <div className="h-[230px]">
-              <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
-                {/* Quick Transfer */}
-              </div>
-            </div>
+            <QuickTransfer />
           </div>
-          <div className="w-full lg:w-[calc(635/1110*100%)] min-h-[300px] ">
+          <div className="w-full xl:w-[calc(635/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 Balance History

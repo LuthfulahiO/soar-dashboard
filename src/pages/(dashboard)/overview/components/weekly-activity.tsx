@@ -58,7 +58,7 @@ export function WeeklyActivity() {
             top: 10,
             right: 0,
             bottom: 0,
-            left: -25,
+            left: -20,
           }}
         >
           <CartesianGrid vertical={false} />

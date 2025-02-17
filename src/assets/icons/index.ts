@@ -1,5 +1,6 @@
 import BellIcon from "@/assets/icons/bell.svg?react";
 import CardIcon from "@/assets/icons/card.svg?react";
+import CaretRightIcon from "@/assets/icons/caretright.svg?react";
 import CashIcon from "@/assets/icons/cash.svg?react";
 import ChipIcon from "@/assets/icons/chip.svg?react";
 import ChipIcon2 from "@/assets/icons/chipblack.svg?react";
@@ -13,6 +14,7 @@ import LogoIcon from "@/assets/icons/logo.svg?react";
 import MastercardIcon from "@/assets/icons/mastercard.svg?react";
 import PaypalIcon from "@/assets/icons/paypal.svg?react";
 import SearchIcon from "@/assets/icons/search.svg?react";
+import SendIcon from "@/assets/icons/send.svg?react";
 import ServiceIcon from "@/assets/icons/service.svg?react";
 import SettingsIcon from "@/assets/icons/settings.svg?react";
 import SettingsTwoIcon from "@/assets/icons/settings2.svg?react";
@@ -40,4 +42,6 @@ export {
   PaypalIcon,
   CashIcon,
   LogoIcon,
+  CaretRightIcon,
+  SendIcon,
 };
