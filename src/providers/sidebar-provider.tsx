@@ -1,14 +1,14 @@
 import { forwardRef, ComponentProps, useState, useCallback } from "react";
 
-import { SidebarContext } from "./sidebar-context";
-
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+
+import { SidebarContext } from "./sidebar-context";
 
 const SidebarProvider = forwardRef<HTMLDivElement, ComponentProps<"div">>(
   ({ className, children, ...props }, ref) => {
     const isMobile = useIsMobile();
-    const [openMobile, setOpenMobile] = useState(true);
+    const [openMobile, setOpenMobile] = useState(false);
 
     const toggleSidebar = useCallback(() => {
       setOpenMobile((open) => !open);

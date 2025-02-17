@@ -1,0 +1,142 @@
+import {
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  AreaChart,
+  Tooltip,
+  Area,
+} from "recharts";
+
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/chart";
+
+interface BalanceHistoryData {
+  month: string;
+  value: number;
+}
+
+interface CustomTickProps {
+  x: number;
+  y: number;
+  payload: {
+    value: string | number;
+  };
+}
+
+const CHART_DATA: BalanceHistoryData[] = [
+  { month: "Jun", value: 160 },
+  { month: "Jul", value: 640 },
+  { month: "Aug", value: 440 },
+  { month: "Sep", value: 250 },
+  { month: "Oct", value: 1000 },
+  { month: "Nov", value: 400 },
+  { month: "Dec", value: 700 },
+  { month: "Jan", value: 220 },
+];
+
+const CHART_MARGINS = {
+  top: 10,
+  right: 0,
+  bottom: 0,
+  left: -25,
+} as const;
+
+const GRADIENT_COLORS = {
+  start: "#2D60FF80",
+  end: "#2D60FF00",
+} as const;
+
+const CustomXAxisTick = ({ x, y, payload }: CustomTickProps) => (
+  <g>
+    <line
+      orientation="left"
+      width="60"
+      height="188"
+      className="stroke-secondary"
+      fill="none"
+      x1={x}
+      x2={x}
+      y1={y - 8}
+      y2={y}
+    />
+    <text
+      x={x}
+      y={y + 10}
+      textAnchor="middle"
+      alignmentBaseline="central"
+      className="weekly-activity-tick"
+    >
+      {payload.value}
+    </text>
+  </g>
+);
+
+const CustomYAxisTick = ({ x, y, payload }: CustomTickProps) => (
+  <g>
+    <line
+      orientation="left"
+      width="60"
+      height="188"
+      fill="none"
+      className="stroke-secondary"
+      x1={x + 8}
+      x2={x + 2}
+      y1={y}
+      y2={y}
+    />
+    <text x={x - 15} y={y} textAnchor="middle" alignmentBaseline="central">
+      {payload.value}
+    </text>
+  </g>
+);
+
+export function BalanceHistory() {
+  return (
+    <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem]">
+      <ChartContainer config={{}} className="h-[236px] w-full">
+        <AreaChart data={CHART_DATA} margin={CHART_MARGINS}>
+          <defs>
+            <linearGradient id="colorFill" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="0%"
+                stopColor={GRADIENT_COLORS.start}
+                stopOpacity={0.9}
+              />
+              <stop offset="100%" stopColor={GRADIENT_COLORS.end} />
+            </linearGradient>
+          </defs>
+
+          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+          <CartesianGrid strokeDasharray="3 3" />
+
+          <XAxis
+            dataKey="month"
+            axisLine={false}
+            tickLine={false}
+            tick={CustomXAxisTick}
+          />
+
+          <YAxis
+            dataKey="value"
+            axisLine={false}
+            tickLine={false}
+            tick={CustomYAxisTick}
+          />
+
+          <Tooltip />
+
+          <Area
+            type="monotone"
+            dataKey="value"
+            stroke="#1814F3"
+            fill="url(#colorFill)"
+            strokeWidth={3}
+          />
+        </AreaChart>
+      </ChartContainer>
+    </div>
+  );
+}
