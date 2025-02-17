@@ -1,6 +1,6 @@
-import { TransactionItem } from "./transaction-item";
-
 import { Transaction } from "@/types/transaction";
+
+import { TransactionItem } from "./transaction-item";
 
 const MOCK_TRANSACTIONS: Transaction[] = [
   {

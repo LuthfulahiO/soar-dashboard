@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 
-import { SheetContent, Sheet } from "./sheet";
-
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/providers/sidebar-context";
+
+import { SheetContent, Sheet } from "./sheet";
 
 const Sidebar = forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ className, children, ...props }, ref) => {

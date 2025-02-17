@@ -1,8 +1,11 @@
 import { DashboardBody } from "@/components/dashboard-body";
 import { DashboardHeader } from "@/components/dashboard-header";
 
+import { BalanceHistory } from "./components/balance-history";
 import { CardDetails } from "./components/card-details";
+import { ExpenseStats } from "./components/expense-stats";
 import { RecentTransaction } from "./components/recent-transaction";
+import { WeeklyActivity } from "./components/weekly-activity";
 
 const cards = [
   {
@@ -66,25 +69,31 @@ function Overview() {
         {/* Middle Row - Weekly Activity and Expense Statistics */}
         <div className="flex flex-col lg:flex-row gap-[1.875rem]">
           <div className="w-full lg:w-[calc(730/1110*100%)] min-h-[300px]">
-            <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
-              Weekly Activity
-            </h2>
-            <div className="h-[322px]">{/* Weekly Activity chart */}</div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
+                Weekly Activity
+              </h2>
+            </div>
+            <WeeklyActivity />
           </div>
           <div className="w-full lg:w-[calc(350/1110*100%)] min-h-[300px]">
-            <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
-              Expense Statistics
-            </h2>
-            <div className="h-[322px]">{/* Pie chart */}</div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
+                Expense Statistics
+              </h2>
+            </div>
+            <ExpenseStats />
           </div>
         </div>
 
         {/* Bottom Row - Quick Transfer and Balance History */}
         <div className="flex flex-col lg:flex-row gap-[1.875rem]">
           <div className="w-full lg:w-[calc(445/1110*100%)] min-h-[300px]">
-            <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
-              Quick Transfer
-            </h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
+                Quick Transfer
+              </h2>
+            </div>
             <div className="h-[230px]">
               <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
                 {/* Quick Transfer */}
@@ -92,10 +101,12 @@ function Overview() {
             </div>
           </div>
           <div className="w-full lg:w-[calc(635/1110*100%)] min-h-[300px] ">
-            <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
-              Balance History
-            </h2>
-            <div className="h-[230px]">{/* Line chart */}</div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
+                Balance History
+              </h2>
+            </div>
+            <BalanceHistory />
           </div>
         </div>
       </DashboardBody>
