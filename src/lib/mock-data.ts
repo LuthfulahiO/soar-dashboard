@@ -29,7 +29,7 @@ export const MOCK_DATA = {
     {
       id: "2",
       type: "paypal" as const,
-      title: "Deposit from PayPal",
+      title: "Deposit Paypal",
       date: "25 January 2021",
       amount: 2500,
       flow: "credit" as const,
@@ -106,18 +106,6 @@ export const MOCK_DATA = {
       name: "Workman",
       role: "Designer",
       image: "/images/workman.png",
-    },
-    {
-      id: "4",
-      name: "Andy",
-      role: "CTO",
-      image: "/images/profile-picture.png",
-    },
-    {
-      id: "5",
-      name: "Mia",
-      role: "CTO",
-      image: "/images/profile-picture.png",
     },
   ],
   userProfile: {

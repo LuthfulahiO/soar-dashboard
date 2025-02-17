@@ -30,7 +30,7 @@ export function RecentTransaction() {
   }
 
   return (
-    <div className="md:bg-white md:py-[1.5625rem] md:pl-[1.5625rem] md:pr-6 overflow-y-auto hide-scrollbar rounded-[25px] md:gap-[10px] flex flex-col md:h-[235px]">
+    <div className="md:bg-white md:py-[1.5625rem] md:pl-[1.5625rem] md:pr-6 overflow-y-auto hide-scrollbar rounded-[25px] gap-[10px] flex flex-col md:h-[235px]">
       {transactions.length === 0 ? (
         <p className="text-secondary text-center">No transactions found</p>
       ) : (

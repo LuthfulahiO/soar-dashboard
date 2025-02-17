@@ -25,7 +25,7 @@ export function WeeklyActivity() {
   }
 
   return (
-    <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem]">
+    <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem] pl-4">
       <div className="flex w-full justify-end gap-[1.875rem]">
         <LegendItem color={CHART_COLORS.deposit} label="Deposit" />
         <LegendItem color={CHART_COLORS.withdraw} label="Withdraw" />

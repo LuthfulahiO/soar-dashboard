@@ -1,9 +1,12 @@
+import { lazy } from "react";
 import { Routes, Route } from "react-router";
 
 import Empty from "@/pages/(dashboard)/empty";
-import DashboardLayout from "@/pages/(dashboard)/layout";
-import Overview from "@/pages/(dashboard)/overview";
-import Settings from "@/pages/(dashboard)/settings";
+
+const Cards = lazy(() => import("@/pages/(dashboard)/cards"));
+const DashboardLayout = lazy(() => import("@/pages/(dashboard)/layout"));
+const Overview = lazy(() => import("@/pages/(dashboard)/overview"));
+const Settings = lazy(() => import("@/pages/(dashboard)/settings"));
 
 function App() {
   return (
@@ -14,7 +17,7 @@ function App() {
         <Route path="transactions" element={<Empty />} />
         <Route path="accounts" element={<Empty />} />
         <Route path="investments" element={<Empty />} />
-        <Route path="credit-cards" element={<Empty />} />
+        <Route path="credit-cards" element={<Cards />} />
         <Route path="loans" element={<Empty />} />
         <Route path="services" element={<Empty />} />
         <Route path="privileges" element={<Empty />} />

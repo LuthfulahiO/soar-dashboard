@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import { DashboardBody } from "@/components/dashboard-body";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { Skeleton } from "@/components/skeleton";
@@ -25,7 +27,8 @@ function Overview() {
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 My Cards
               </h2>
-              <button
+              <Link
+                to="/credit-cards"
                 className={cn(
                   "text-[1.0625rem] font-semibold leading-[1.285625] cursor-pointer",
                   "transition-all duration-200",
@@ -36,7 +39,7 @@ function Overview() {
                 )}
               >
                 See All
-              </button>
+              </Link>
             </div>
             <div className="w-full overflow-hidden">
               {isCardsLoading ? (
@@ -73,7 +76,7 @@ function Overview() {
         </div>
 
         {/* Middle Row - Weekly Activity and Expense Statistics */}
-        <div className="flex flex-col xl:flex-row gap-[1.875rem]">
+        <div className="flex flex-col xl:flex-row gap-[1.875rem] md:mt-0 mt-10">
           <div className="w-full xl:w-[calc(730/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
@@ -93,7 +96,7 @@ function Overview() {
         </div>
 
         {/* Bottom Row - Quick Transfer and Balance History */}
-        <div className="flex flex-col xl:flex-row gap-[1.875rem]">
+        <div className="flex flex-col xl:flex-row gap-[1.875rem] md:mt-0 mt-10">
           <div className="w-full xl:w-[calc(445/1110*100%)]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
@@ -102,7 +105,7 @@ function Overview() {
             </div>
             <QuickTransfer />
           </div>
-          <div className="w-full xl:w-[calc(635/1110*100%)]">
+          <div className="w-full xl:w-[calc(635/1110*100%)] md:mt-0 mt-10">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[1.375rem] font-semibold leading-[1.664375rem]">
                 Balance History

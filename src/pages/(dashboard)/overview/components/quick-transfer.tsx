@@ -45,7 +45,7 @@ export function QuickTransfer() {
   };
 
   return (
-    <div className="flex flex-col gap-3 rounded-[25px] md:gap-[30px] md:bg-white md:py-[2.1875rem] md:px-[1.5625rem]">
+    <div className="flex flex-col rounded-[25px] gap-[1.875rem] md:bg-white md:py-[2.1875rem] md:px-[1.5625rem]">
       <Carousel
         className="relative w-[90%]"
         opts={{

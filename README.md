@@ -86,7 +86,16 @@ Code will be automatically formatted on save and ESLint errors will be highlight
 
 ```
 src/
-├── components/     # Reusable components
-├── App.tsx        # Main application component
+├── assets/
+│   └── icons/     # SVG icons and icon components
+├── components/    # Reusable UI components
+├── hooks/         # Custom React hooks
+├── lib/          # Utilities, services, and mock data
+├── pages/        # Application pages and layouts
+│   └── (dashboard)/  # Dashboard-related pages
+│       ├── overview/  # Overview page
+│       ├── settings/  # Settings page
+│       ├── credit-cards/  # Credit cards page
+│       └── empty/     # Empty page (used as a placeholder for empty pages)
 └── main.tsx       # Application entry point
 ```
