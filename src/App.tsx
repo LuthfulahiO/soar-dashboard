@@ -1,10 +1,12 @@
+import { lazy } from "react";
 import { Routes, Route } from "react-router";
 
-import Cards from "@/pages/(dashboard)/cards";
 import Empty from "@/pages/(dashboard)/empty";
-import DashboardLayout from "@/pages/(dashboard)/layout";
-import Overview from "@/pages/(dashboard)/overview";
-import Settings from "@/pages/(dashboard)/settings";
+
+const Cards = lazy(() => import("@/pages/(dashboard)/cards"));
+const DashboardLayout = lazy(() => import("@/pages/(dashboard)/layout"));
+const Overview = lazy(() => import("@/pages/(dashboard)/overview"));
+const Settings = lazy(() => import("@/pages/(dashboard)/settings"));
 
 function App() {
   return (

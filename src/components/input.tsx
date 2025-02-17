@@ -21,6 +21,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className
         )}
         ref={ref}
+        aria-invalid={error ? "true" : "false"}
+        aria-describedby={error ? "error-message" : undefined}
         {...props}
       />
     );
