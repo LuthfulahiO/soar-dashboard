@@ -97,7 +97,7 @@ export function BalanceHistory() {
   }
 
   return (
-    <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem]">
+    <div className="flex flex-col gap-3 overflow-y-auto rounded-[25px] md:gap-[10px] md:bg-white md:py-7 md:pl-[2.0625rem] md:pr-[1.875rem] pl-4 pr-2">
       <ChartContainer config={{}} className="h-[236px] w-full">
         <AreaChart data={balanceData} margin={CHART_MARGINS}>
           <defs>
