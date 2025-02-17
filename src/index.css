@@ -4,4 +4,43 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-lato: "Lato", sans-serif;
+
+  --color-primary: #343c6a;
+
+  --color-secondary: #718ebf;
+  --color-secondary-light: #8ba3cb;
+
+  --color-neutral-*: initial;
+  --color-neutral-900: #232323;
+  --color-neutral-500: #b1b1b1;
+  --color-neutral-50: #f5f7fa;
+
+  --color-border: #e6eff5;
+
+  --color-success: #41d4a8;
+  --color-error: #ff4b4a;
+
+  --sidebar-width: 15.625rem;
+}
+
+@layer base {
+  body {
+    @apply text-primary;
+  }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
