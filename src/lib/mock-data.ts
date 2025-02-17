@@ -120,4 +120,16 @@ export const MOCK_DATA = {
       image: "/images/profile-picture.png",
     },
   ],
+  userProfile: {
+    yourName: "Charlene Reed",
+    userName: "charlenereed",
+    email: "charlenereed@gmail.com",
+    dateOfBirth: "",
+    presentAddress: "",
+    permanentAddress: "",
+    postalCode: "",
+    city: "",
+    country: "",
+    profileImage: "/images/profile-picture.png",
+  },
 };

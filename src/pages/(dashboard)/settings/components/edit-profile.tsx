@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -7,6 +7,8 @@ import { PencilIcon } from "@/assets/icons";
 import { FormError } from "@/components/form-error";
 import { Input } from "@/components/input";
 import { Label } from "@/components/label";
+import { Skeleton } from "@/components/skeleton";
+import { useUserProfile } from "@/hooks/use-queries";
 import { cn } from "@/lib/utils";
 
 const profileFormSchema = z.object({
@@ -34,6 +36,7 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function EditProfile() {
+  const { data: profile, isLoading } = useUserProfile();
   const [previewImage, setPreviewImage] = useState<string>(
     "/images/profile-picture.png"
   );
@@ -43,6 +46,7 @@ export default function EditProfile() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
@@ -59,6 +63,15 @@ export default function EditProfile() {
     },
   });
 
+  useEffect(() => {
+    if (profile) {
+      reset(profile);
+      if (profile.profileImage) {
+        setPreviewImage(profile.profileImage);
+      }
+    }
+  }, [profile, reset]);
+
   const handleImageChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
@@ -74,6 +87,24 @@ export default function EditProfile() {
   const onSubmit = (data: ProfileFormValues) => {
     console.warn(data);
   };
+
+  if (isLoading) {
+    return (
+      <div className="w-full px-0.5 lg:pl-[30px] space-y-6">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start lg:gap-14">
+          <Skeleton className="w-[90px] h-[90px] rounded-full bg-neutral-500" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full lg:flex-1">
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="space-y-2">
+                <Skeleton className="h-5 w-20 bg-neutral-500" />
+                <Skeleton className="h-[50px] w-full bg-neutral-500" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full px-0.5 lg:pl-[30px]">
