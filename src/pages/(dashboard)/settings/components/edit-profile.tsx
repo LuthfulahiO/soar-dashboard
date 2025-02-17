@@ -1,12 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { useCallback, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { PencilIcon } from "@/assets/icons";
+import { PencilIcon, CaretDownIcon } from "@/assets/icons";
+import { Calendar } from "@/components/calendar";
 import { FormError } from "@/components/form-error";
 import { Input } from "@/components/input";
 import { Label } from "@/components/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import { Skeleton } from "@/components/skeleton";
 import { useUserProfile } from "@/hooks/use-queries";
 import { cn } from "@/lib/utils";
@@ -35,26 +38,21 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
-const formatDate = (date: Date) => {
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-};
-
 export default function EditProfile() {
   const { data: profile, isLoading } = useUserProfile();
   const [previewImage, setPreviewImage] = useState<string>(
     "/images/profile-picture.png"
   );
   const [isHovering, setIsHovering] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
+    setValue,
   } = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
@@ -70,6 +68,8 @@ export default function EditProfile() {
       country: "",
     },
   });
+
+  const dateOfBirth = watch("dateOfBirth");
 
   useEffect(() => {
     if (profile) {
@@ -87,16 +87,6 @@ export default function EditProfile() {
         // Create preview URL for the selected image
         const imageUrl = URL.createObjectURL(file);
         setPreviewImage(imageUrl);
-      }
-    },
-    []
-  );
-
-  const handleDateInput = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const date = e.target.valueAsDate;
-      if (date) {
-        e.target.setAttribute("data-display", formatDate(date));
       }
     },
     []
@@ -253,19 +243,65 @@ export default function EditProfile() {
             {/* Date of Birth */}
             <div className="space-y-2">
               <Label htmlFor="dateOfBirth">Date of Birth</Label>
-              <Input
-                id="dateOfBirth"
-                type="date"
-                {...register("dateOfBirth")}
-                error={!!errors.dateOfBirth}
-                placeholder="25 January 1990"
-                onChange={(e) => {
-                  handleDateInput(e);
-                  register("dateOfBirth").onChange(e);
-                }}
-                onClick={(e) => (e.target as HTMLInputElement).showPicker()}
-                className="w-full relative [&::-webkit-datetime-edit]:hidden [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-2 [&::-webkit-calendar-picker-indicator]:opacity-100 [&::before]:absolute [&::before]:left-3 [&::before]:top-1/2 [&::before]:-translate-y-1/2 [&::before]:content-[attr(data-display)] [&::before]:text-neutral-500 [&:not(:placeholder-shown)::before]:text-neutral-900 cursor-pointer"
-              />
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                <PopoverTrigger asChild>
+                  <div className="relative">
+                    <Input
+                      id="dateOfBirth"
+                      placeholder="25 January 1990"
+                      value={
+                        dateOfBirth
+                          ? format(new Date(dateOfBirth), "dd MMMM yyyy")
+                          : ""
+                      }
+                      readOnly
+                      {...register("dateOfBirth")}
+                      error={!!errors.dateOfBirth}
+                      className="cursor-pointer bg-white"
+                    />
+                    <CaretDownIcon
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 pointer-events-none"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0 bg-white" align="start">
+                  <div className="flex flex-col">
+                    <Calendar
+                      mode="single"
+                      selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
+                      onSelect={(newDate) => {
+                        if (newDate) {
+                          setValue(
+                            "dateOfBirth",
+                            format(newDate, "yyyy-MM-dd"),
+                            {
+                              shouldValidate: true,
+                            }
+                          );
+                        }
+                      }}
+                      initialFocus
+                      className="rounded-md"
+                    />
+                    <div className="flex justify-end p-3 border-t">
+                      <button
+                        type="button"
+                        onClick={() => setIsCalendarOpen(false)}
+                        className={cn(
+                          "px-4 py-2 text-sm font-medium",
+                          "bg-neutral-900 text-white rounded-md",
+                          "transition-all duration-200",
+                          "hover:bg-neutral-800 active:scale-95",
+                          "focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
+                        )}
+                      >
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
               <FormError message={errors.dateOfBirth?.message} />
             </div>
 

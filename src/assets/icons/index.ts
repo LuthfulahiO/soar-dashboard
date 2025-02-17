@@ -1,7 +1,10 @@
 import BellIcon from "@/assets/icons/bell.svg?react";
 import CardIcon from "@/assets/icons/card.svg?react";
+import CaretDownIcon from "@/assets/icons/caretdown.svg?react";
 import CaretRightIcon from "@/assets/icons/caretright.svg?react";
 import CashIcon from "@/assets/icons/cash.svg?react";
+import ChevronLeftIcon from "@/assets/icons/chevron-left.svg?react";
+import ChevronRightIcon from "@/assets/icons/chevron-right.svg?react";
 import ChipIcon from "@/assets/icons/chip.svg?react";
 import ChipIcon2 from "@/assets/icons/chipblack.svg?react";
 import CreditCardIcon from "@/assets/icons/creditcard.svg?react";
@@ -46,4 +49,7 @@ export {
   CaretRightIcon,
   SendIcon,
   PencilIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CaretDownIcon,
 };
