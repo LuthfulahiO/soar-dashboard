@@ -7,53 +7,36 @@ import {
   CarouselItem,
   CarouselNext,
 } from "@/components/carousel";
+import { Skeleton } from "@/components/skeleton";
+import { useContacts } from "@/hooks/use-queries";
 import { cn } from "@/lib/utils";
 
 type Contact = {
-  id: number;
+  id: string;
   name: string;
   role: string;
   image: string;
 };
 
-const contactList: Contact[] = [
-  {
-    id: 1,
-    name: "Livia Bator",
-    role: "CEO",
-    image: "/images/livia.png",
-  },
-  {
-    id: 2,
-    name: "Randy Press",
-    role: "Director",
-    image: "/images/randy.png",
-  },
-  {
-    id: 3,
-    name: "Workman",
-    role: "Designer",
-    image: "/images/workman.png",
-  },
-  {
-    id: 4,
-    name: "Andy",
-    role: "CTO",
-    image: "/images/profile-picture.png",
-  },
-  {
-    id: 5,
-    name: "Mia",
-    role: "CTO",
-    image: "/images/profile-picture.png",
-  },
-];
-
 export function QuickTransfer() {
-  const [selectedContactId, setSelectedContactId] = useState<number | null>(
+  const { data: contacts, isLoading } = useContacts();
+  const [selectedContactId, setSelectedContactId] = useState<string | null>(
     null
   );
   const [amount, setAmount] = useState<string>("");
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-3 rounded-[25px] md:gap-[30px] md:bg-white md:py-[2.1875rem] md:px-[1.5625rem]">
+        <div className="flex gap-4">
+          <Skeleton className="h-20 w-20 rounded-full md:bg-secondary/20 bg-neutral-500" />
+          <Skeleton className="h-20 w-20 rounded-full md:bg-secondary/20 bg-neutral-500" />
+          <Skeleton className="h-20 w-20 rounded-full md:bg-secondary/20 bg-neutral-500" />
+        </div>
+        <Skeleton className="h-14 w-full  md:bg-secondary/20 bg-neutral-500" />
+      </div>
+    );
+  }
 
   const handleSend = () => {
     if (!selectedContactId || !amount) {
@@ -70,7 +53,7 @@ export function QuickTransfer() {
         }}
       >
         <CarouselContent className="h-full">
-          {contactList.map((contact) => (
+          {contacts?.map((contact) => (
             <CarouselItem key={contact.id} className="basis-1/3">
               <ContactCard
                 {...contact}

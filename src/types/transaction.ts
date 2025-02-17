@@ -1,5 +1,4 @@
 export type TransactionType = "card" | "paypal" | "cash";
-export type TransactionFlow = "credit" | "debit";
 
 export interface Transaction {
   id: string;
@@ -7,5 +6,5 @@ export interface Transaction {
   title: string;
   date: string;
   amount: number;
-  flow: TransactionFlow;
+  flow: "debit" | "credit";
 }
